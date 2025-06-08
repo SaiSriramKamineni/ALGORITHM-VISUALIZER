@@ -16,7 +16,7 @@ body {
     color: aqua;
     text-align: center;
     position: relative;
-    overflow: hidden; /* Prevents scrollbar due to animations */
+    overflow: hidden;
 }
 
 header {
@@ -34,8 +34,6 @@ h1 {
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
     animation: glow 5s infinite alternate;
-    
-
 }
 
 @keyframes glow {
@@ -53,7 +51,7 @@ h1 {
     justify-content: center;
     align-items: center;
     gap: 20px;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
     transition: transform 0.3s ease-in-out;
@@ -70,8 +68,8 @@ h1 {
 }
 
 button {
-    width: 250px; /* Increased size */
-    height: 150px; /* Increased size */
+    width: 250px;
+    height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,23 +81,22 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Improves text readability on image */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     font-family: 'Fira Sans', Arial, sans-serif;
 }
 
 .button.sorting {
     color: rgb(244, 6, 6);
     font-size: 210%;
-    background-image: url('../sorting.png'); /* Replace with actual image path */
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7), -1px -1px 2px rgba(255, 255, 255, 0.7); /* Enhanced text shadow for better readability */
+    background-image: url('sorting.png');
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7), -1px -1px 2px rgba(255, 255, 255, 0.7);
 }
 
 .button.searching {
     color: rgb(244, 6, 6);
-    ;
     font-size: 210%;
-    background-image: url('../searching.png'); /* Replace with actual image path */
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7), -1px -1px 2px rgba(255, 255, 255, 0.7); /* Enhanced text shadow for better readability */
+    background-image: url('searching.png');
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7), -1px -1px 2px rgba(255, 255, 255, 0.7);
 }
 
 .button:hover {
