@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Algorithm Visualizer - Learn sorting and searching algorithms through real-time visualization">
+    <meta name="keywords" content="algorithm, visualization, sorting, searching, computer science, learning">
+    <meta name="author" content="Algorithm Visualizer">
+    <meta name="theme-color" content="#151f32">
+    
+    <title>🔥 Algorithm Visualizer - Interactive Learning Tool</title>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="image.png">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="Sorting/sorting.html" as="document">
+    <link rel="preload" href="Searching/searching.html" as="document">
+</head>
+<body>
+    <header class="main-header" role="banner">
+        <h1 class="main-title" id="main-title">
+            <span class="emoji">🔥</span>
+            <span class="big">A</span>LGORITHM-<span class="big">V</span>ISUALIZER
+            <span class="emoji">🔥</span>
+        </h1>
+        <p class="tagline">Master algorithms through interactive visualization</p>
+    </header>
+
+    <main class="main-content" role="main">
+        <section class="modules-section" aria-labelledby="modules-heading">
+            <h2 id="modules-heading" class="visually-hidden">Algorithm Modules</h2>
+            
+            <div class="module-container sorting-container">
+                <article class="module-card sorting-module">
+                    <div class="module-content">
+                        <h3 class="module-title">Sorting Visualizer</h3>
+                        <p class="module-description">Learn 5 essential sorting algorithms with step-by-step visualization</p>
+                        <ul class="module-features">
+                            <li>Bubble Sort</li>
+                            <li>Selection Sort</li>
+                            <li>Insertion Sort</li>
+                            <li>Merge Sort</li>
+                            <li>Quick Sort</li>
+                        </ul>
+                    </div>
+                    <button class="module-button sorting" 
+                            onclick="navigateToModule('Sorting/sorting.html')"
+                            aria-label="Open Sorting Visualizer">
+                        <span class="button-text">Start Learning</span>
+                        <span class="button-icon">→</span>
+                    </button>
+                </article>
+            </div>
+
+            <div class="module-container searching-container">
+                <article class="module-card searching-module">
+                    <div class="module-content">
+                        <h3 class="module-title">Searching Visualizer</h3>
+                        <p class="module-description">Master linear and binary search algorithms through interactive examples</p>
+                        <ul class="module-features">
+                            <li>Linear Search</li>
+                            <li>Binary Search</li>
+                            <li>Step-by-step execution</li>
+                            <li>Performance comparison</li>
+                        </ul>
+                    </div>
+                    <button class="module-button searching" 
+                            onclick="navigateToModule('Searching/searching.html')"
+                            aria-label="Open Searching Visualizer">
+                        <span class="button-text">Start Learning</span>
+                        <span class="button-icon">→</span>
+                    </button>
+                </article>
+            </div>
+        </section>
+
+        <section class="features-section" aria-labelledby="features-heading">
+            <h2 id="features-heading" class="section-title">Why Choose Our Visualizer?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Real-time Visualization</h3>
+                    <p>Watch algorithms execute step-by-step with color-coded elements</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Interactive Controls</h3>
+                    <p>Adjust speed, array size, and generate new data on the fly</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Educational Content</h3>
+                    <p>Learn with code examples, complexity analysis, and explanations</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Beautiful Design</h3>
+                    <p>Modern, responsive interface that works on all devices</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer" role="contentinfo">
+        <p>&copy; 2025 Algorithm Visualizer. Built By SAI SRIRAM KAMINENI for learning.</p>
+        <nav class="footer-nav">
+            <a href="#main-title" class="back-to-top">Back to Top</a>
+        </nav>
+    </footer>
+
+    <script>
+        // Modern navigation function with error handling
+        function navigateToModule(path) {
+            try {
+                // Add loading state
+                const button = event.target.closest('.module-button');
+                const originalText = button.querySelector('.button-text').textContent;
+                button.querySelector('.button-text').textContent = 'Loading...';
+                button.disabled = true;
+
+                // Navigate with a small delay for better UX
+                setTimeout(() => {
+                    window.location.href = path;
+                }, 300);
+            } catch (error) {
+                console.error('Navigation error:', error);
+                // Fallback navigation
+                window.location.href = path;
+            }
+        }
+
+        // Add smooth scrolling for back to top
+        document.querySelector('.back-to-top').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('main-title').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        // Add keyboard navigation support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && document.activeElement.classList.contains('module-button')) {
+                document.activeElement.click();
+            }
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>

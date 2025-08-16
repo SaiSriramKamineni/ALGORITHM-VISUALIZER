@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Searching Algorithm Visualizer - Learn linear and binary search algorithms with step-by-step visualization">
+    <meta name="keywords" content="searching, algorithms, linear search, binary search, visualization, computer science">
+    <meta name="author" content="Algorithm Visualizer">
+    <meta name="theme-color" content="#151f32">
+    
+    <title>🔍 Searching Visualizer - Interactive Algorithm Learning</title>
+    
+    <link rel="stylesheet" href="searching.css">
+    <link rel="stylesheet" href="prism.css">
+    <link rel="shortcut icon" href="../image.png" type="image/x-icon">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="../index.html" as="document">
+</head>
+
+<body>
+    <header class="app-header" role="banner">
+        <div class="header-content">
+            <div class="header-top">
+                <h1 class="app-title">
+                    <span class="big">S</span>EARCHING
+                    <span class="big">V</span>ISUALIZER<span class="emoji">🔍</span>
+                </h1>
+                
+                <nav class="nav-toggle">
+                    <a href="../Sorting/sorting.html" class="nav-link" aria-label="Switch to Sorting Visualizer">
+                        <span class="nav-icon">🔥</span>
+                        <span class="nav-text">Sorting</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="controls-panel">
+                <div class="control-group">
+                    <div class="control-item compact">
+                        <label for="size_slider" class="control-label">Size</label>
+                        <div class="slider-container">
+                            <input type="range" 
+                                   id="size_slider" 
+                                   min="4" 
+                                   max="100" 
+                                   value="64" 
+                                   class="slider"
+                                   aria-label="Array size control">
+                            <span class="slider-value" id="size_value">64</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-item compact">
+                        <label for="speed_slider" class="control-label">Speed</label>
+                        <div class="slider-container">
+                            <input type="range" 
+                                   id="speed_slider" 
+                                   min="1" 
+                                   max="5" 
+                                   value="5" 
+                                   class="slider"
+                                   aria-label="Animation speed control">
+                            <span class="slider-value" id="speed_value">5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button id="generate" class="btn btn-primary compact" aria-label="Generate new random array">
+                            <span class="btn-icon">🔄</span>
+                            <span class="btn-text">Generate</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Legacy support element -->
+                <div class="selected" style="display: none;">Ready</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content" role="main">
+        <section class="visualization-section" aria-labelledby="visualization-heading">
+            <h2 id="visualization-heading" class="visually-hidden">Search Algorithm Visualization</h2>
+            
+            <div class="array-container">
+                <div id="mainbody" class="array-display" role="region" aria-label="Array visualization">
+                    <!-- Array bars will be generated here -->
+                </div>
+            </div>
+            
+            <div class="search-controls">
+                <div class="search-input-group">
+                    <label for="searchingVal" class="search-label">Search for a value:</label>
+                    <div class="search-input-container">
+                        <input type="number" 
+                               id="searchingVal" 
+                               name="search" 
+                               placeholder="Enter value (20-350)"
+                               min="20" 
+                               max="350"
+                               class="search-input"
+                               aria-label="Search value input">
+                        <span class="input-range">Range: 20-350</span>
+                    </div>
+                </div>
+                
+                <div class="algorithm-controls">
+                    <h3 class="controls-title">Choose a Search Algorithm</h3>
+                    <div class="algorithm-buttons">
+                        <button id="linear_Search" class="btn btn-algorithm" aria-label="Run Linear Search algorithm">
+                            <span class="btn-icon">🔍</span>
+                            Linear Search
+                        </button>
+                        <button id="binary_Search" class="btn btn-algorithm" aria-label="Run Binary Search algorithm">
+                            <span class="btn-icon">🎯</span>
+                            Binary Search
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="search-results">
+                    <div class="result-item">
+                        <span class="result-label">Element Found at:</span>
+                        <span class="result-value" id="element-index">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Steps Taken:</span>
+                        <span class="result-value" id="step-count">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="navigation-controls">
+                <a href="../index.html" class="btn btn-secondary" aria-label="Return to main page">
+                    <span class="btn-icon">🏠</span>
+                    Back to Home
+                </a>
+            </div>
+        </section>
+
+        <section class="documentation-section" aria-labelledby="documentation-heading">
+            <h2 id="documentation-heading" class="section-title">Algorithm Documentation</h2>
+            
+            <div class="documentation-content">
+                <div class="code-example">
+                    <div class="code-header">
+                        <h3>Implementation in Java</h3>
+                        <div class="code-tabs">
+                            <button class="tab-btn active" data-tab="linear">Linear Search</button>
+                            <button class="tab-btn" data-tab="binary">Binary Search</button>
+                        </div>
+                    </div>
+                    
+                    <div class="code-content">
+                        <div class="tab-content active" id="linear-code">
+                            <pre><code class="language-java">// Java code for linearly searching x in arr[]
+// If x is present then return its location, otherwise return -1
+
+class LinearSearch {
+    public static int search(int arr[], int x) {
+        int N = arr.length;
+        for (int i = 0; i < N; i++) {
+            if (arr[i] == x)
+                return i;
+        }
+        return -1;
+    }
+
+    // Driver's code
+    public static void main(String args[]) {
+        int arr[] = { 2, 3, 4, 10, 40 };
+        int x = 10;
+
+        // Function call
+        int result = search(arr, x);
+        if (result == -1)
+            System.out.print("Element is not present in array");
+        else
+            System.out.print("Element is present at index " + result);
+    }
+}</code></pre>
+                        </div>
+                        
+                        <div class="tab-content" id="binary-code">
+                            <pre><code class="language-java">// Java program for implementation of Binary Search
+class BinarySearch {
+    // Returns index of x if it is present in arr[l..r], else return -1
+    int binarySearch(int arr[], int l, int r, int x) {
+        if (r >= l) {
+            int mid = l + (r - l) / 2;
+            
+            // If the element is present at the middle itself
+            if (arr[mid] == x)
+                return mid;
+            
+            // If element is smaller than mid, then it can only be present in left subarray
+            if (arr[mid] > x)
+                return binarySearch(arr, l, mid - 1, x);
+            
+            // Else the element can only be present in right subarray
+            return binarySearch(arr, mid + 1, r, x);
+        }
+        
+        // We reach here when element is not present in array
+        return -1;
+    }
+    
+    // Driver method to test above
+    public static void main(String args[]) {
+        BinarySearch ob = new BinarySearch();
+        int arr[] = { 2, 3, 4, 10, 40 };
+        int n = arr.length;
+        int x = 10;
+        int result = ob.binarySearch(arr, 0, n - 1, x);
+        if (result == -1)
+            System.out.println("Element not present");
+        else
+            System.out.println("Element found at index " + result);
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="complexity-analysis">
+                    <div class="complexity-card">
+                        <h3>Time Complexity</h3>
+                        <div class="complexity-content">
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Linear Search:</span>
+                                <div class="complexity-details">
+                                    <span class="complexity-value">O(n)</span>
+                                    <span class="complexity-note">Best: O(1), Worst: O(n), Average: O(n)</span>
+                                </div>
+                            </div>
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Binary Search:</span>
+                                <div class="complexity-details">
+                                    <span class="complexity-value">O(log n)</span>
+                                    <span class="complexity-note">Best: O(1), Worst: O(log n), Average: O(log n)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="complexity-card">
+                        <h3>Space Complexity</h3>
+                        <div class="complexity-content">
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Linear Search:</span>
+                                <span class="complexity-value">O(1)</span>
+                            </div>
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Binary Search:</span>
+                                <span class="complexity-value">O(1) iterative, O(log n) recursive</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="complexity-card">
+                        <h3>Key Differences</h3>
+                        <div class="complexity-content">
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Linear Search:</span>
+                                <span class="complexity-note">Works on unsorted arrays, simple implementation</span>
+                            </div>
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Binary Search:</span>
+                                <span class="complexity-note">Requires sorted array, much faster for large datasets</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="searching.js"></script>
+    <script src="prism.js"></script>
+    <script src="LinearSearch.js"></script>
+    <script src="Binary.js"></script>
+    
+    <script>
+        // Tab functionality for code examples
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetTab = btn.dataset.tab;
+                    
+                    // Remove active class from all tabs and contents
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    btn.classList.add('active');
+                    document.getElementById(targetTab + '-code').classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Sorting Algorithm Visualizer - Learn 5 essential sorting algorithms with step-by-step visualization">
+    <meta name="keywords" content="sorting, algorithms, bubble sort, selection sort, insertion sort, merge sort, quick sort, visualization">
+    <meta name="author" content="Algorithm Visualizer">
+    <meta name="theme-color" content="#151f32">
+    
+    <title>🔥 Sorting Visualizer - Interactive Algorithm Learning</title>
+    
+    <link rel="stylesheet" href="sorting.css">
+    <link rel="stylesheet" href="prism.css">
+    <link rel="shortcut icon" href="../image.png" type="image/x-icon">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="../index.html" as="document">
+</head>
+
+<body>
+    <header class="app-header" role="banner">
+        <div class="header-content">
+            <div class="header-top">
+                <h1 class="app-title">
+                    <span class="big">S</span>ORTING<span class="emoji">🔥</span>
+                    <span class="big">V</span>ISUALIZER
+                </h1>
+                
+                <nav class="nav-toggle">
+                    <a href="../Searching/searching.html" class="nav-link" aria-label="Switch to Searching Visualizer">
+                        <span class="nav-icon">🔍</span>
+                        <span class="nav-text">Searching</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="controls-panel">
+                <div class="control-group">
+                    <div class="control-item compact">
+                        <label for="size_slider" class="control-label">Size</label>
+                        <div class="slider-container">
+                            <input type="range" 
+                                   id="size_slider" 
+                                   min="4" 
+                                   max="100" 
+                                   value="64" 
+                                   class="slider"
+                                   aria-label="Array size control">
+                            <span class="slider-value" id="size_value">64</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-item compact">
+                        <label for="speed_slider" class="control-label">Speed</label>
+                        <div class="slider-container">
+                            <input type="range" 
+                                   id="speed_slider" 
+                                   min="1" 
+                                   max="5" 
+                                   value="5" 
+                                   class="slider"
+                                   aria-label="Animation speed control">
+                            <span class="slider-value" id="speed_value">5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button id="generate" class="btn btn-primary compact" aria-label="Generate new random array">
+                            <span class="btn-icon">🔄</span>
+                            <span class="btn-text">Generate</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Legacy support element -->
+                <div class="selected" style="display: none;">Ready</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content" role="main">
+        <section class="visualization-section" aria-labelledby="visualization-heading">
+            <h2 id="visualization-heading" class="visually-hidden">Algorithm Visualization</h2>
+            
+            <div class="array-container">
+                <div id="mainbody" class="array-display" role="region" aria-label="Array visualization">
+                    <!-- Array bars will be generated here -->
+                </div>
+            </div>
+            
+            <div class="algorithm-controls">
+                <h3 class="controls-title">Choose an Algorithm</h3>
+                <div class="algorithm-buttons">
+                    <button class="btn btn-algorithm" data-algorithm="bubble" aria-label="Run Bubble Sort algorithm">
+                        <span class="btn-icon">🫧</span>
+                        Bubble Sort
+                    </button>
+                    <button class="btn btn-algorithm" data-algorithm="selection" aria-label="Run Selection Sort algorithm">
+                        <span class="btn-icon">🎯</span>
+                        Selection Sort
+                    </button>
+                    <button class="btn btn-algorithm" data-algorithm="insertion" aria-label="Run Insertion Sort algorithm">
+                        <span class="btn-icon">📥</span>
+                        Insertion Sort
+                    </button>
+                    <button class="btn btn-algorithm" data-algorithm="merge" aria-label="Run Merge Sort algorithm">
+                        <span class="btn-icon">🔀</span>
+                        Merge Sort
+                    </button>
+                    <button class="btn btn-algorithm" data-algorithm="quick" aria-label="Run Quick Sort algorithm">
+                        <span class="btn-icon">⚡</span>
+                        Quick Sort
+                    </button>
+                </div>
+            </div>
+            
+            <div class="navigation-controls">
+                <a href="../index.html" class="btn btn-secondary" aria-label="Return to main page">
+                    <span class="btn-icon">🏠</span>
+                    Back to Home
+                </a>
+            </div>
+        </section>
+
+        <section class="documentation-section" aria-labelledby="documentation-heading">
+            <h2 id="documentation-heading" class="section-title">Algorithm Documentation</h2>
+            
+            <div class="documentation-content">
+                <div class="code-example">
+                    <div class="code-header">
+                        <h3>Implementation in Java</h3>
+                        <div class="code-tabs">
+                            <button class="tab-btn active" data-tab="bubble">Bubble Sort</button>
+                            <button class="tab-btn" data-tab="selection">Selection Sort</button>
+                            <button class="tab-btn" data-tab="insertion">Insertion Sort</button>
+                            <button class="tab-btn" data-tab="merge">Merge Sort</button>
+                            <button class="tab-btn" data-tab="quick">Quick Sort</button>
+                        </div>
+                    </div>
+                    
+                    <div class="code-content">
+                        <div class="tab-content active" id="bubble-code">
+                            <pre><code class="language-java">// Java program for implementation of Bubble Sort
+import java.util.*;
+
+class BubbleSort {
+    void bubbleSort(int arr[]) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++)
+            for (int j = 0; j < n - i - 1; j++)
+                if (arr[j] > arr[j + 1]) {
+                    // swap arr[j+1] and arr[j]
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+    }
+
+    /* Prints the array */
+    void printArray(int arr[]) {
+        int n = arr.length;
+        for (int i = 0; i < n; ++i)
+            System.out.print(arr[i] + " ");
+        System.out.println();
+    }
+
+    // Driver method to test above
+    public static void main(String args[]) {
+        BubbleSort ob = new BubbleSort();
+        int arr[] = { 5, 1, 4, 2, 8 };
+        ob.bubbleSort(arr);
+        System.out.println("Sorted array");
+        ob.printArray(arr);
+    }
+}</code></pre>
+                        </div>
+                        
+                        <div class="tab-content" id="selection-code">
+                            <pre><code class="language-java">// Java program for implementation of Selection Sort
+class SelectionSort {
+    void sort(int arr[]) {
+        int n = arr.length;
+        for (int i = 0; i < n-1; i++) {
+            int min_idx = i;
+            for (int j = i+1; j < n; j++)
+                if (arr[j] < arr[min_idx])
+                    min_idx = j;
+            
+            int temp = arr[min_idx];
+            arr[min_idx] = arr[i];
+            arr[i] = temp;
+        }
+    }
+}</code></pre>
+                        </div>
+                        
+                        <div class="tab-content" id="insertion-code">
+                            <pre><code class="language-java">// Java program for implementation of Insertion Sort
+class InsertionSort {
+    void sort(int arr[]) {
+        int n = arr.length;
+        for (int i = 1; i < n; ++i) {
+            int key = arr[i];
+            int j = i - 1;
+            
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+    }
+}</code></pre>
+                        </div>
+                        
+                        <div class="tab-content" id="merge-code">
+                            <pre><code class="language-java">// Java program for implementation of Merge Sort
+class MergeSort {
+    void merge(int arr[], int l, int m, int r) {
+        int n1 = m - l + 1;
+        int n2 = r - m;
+        
+        int L[] = new int[n1];
+        int R[] = new int[n2];
+        
+        for (int i = 0; i < n1; ++i)
+            L[i] = arr[l + i];
+        for (int j = 0; j < n2; ++j)
+            R[j] = arr[m + 1 + j];
+        
+        int i = 0, j = 0, k = l;
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                arr[k] = L[i];
+                i++;
+            } else {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+        
+        while (i < n1) {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+        
+        while (j < n2) {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+    
+    void sort(int arr[], int l, int r) {
+        if (l < r) {
+            int m = l + (r - l) / 2;
+            sort(arr, l, m);
+            sort(arr, m + 1, r);
+            merge(arr, l, m, r);
+        }
+    }
+}</code></pre>
+                        </div>
+                        
+                        <div class="tab-content" id="quick-code">
+                            <pre><code class="language-java">// Java program for implementation of Quick Sort
+class QuickSort {
+    int partition(int arr[], int low, int high) {
+        int pivot = arr[high];
+        int i = (low - 1);
+        
+        for (int j = low; j < high; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+        
+        return i + 1;
+    }
+    
+    void sort(int arr[], int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+            sort(arr, low, pi - 1);
+            sort(arr, pi + 1, high);
+        }
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="complexity-analysis">
+                    <div class="complexity-card">
+                        <h3>Time Complexity</h3>
+                        <div class="complexity-content">
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Bubble Sort:</span>
+                                <span class="complexity-value">O(n²)</span>
+                            </div>
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Selection Sort:</span>
+                                <span class="complexity-value">O(n²)</span>
+                            </div>
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Insertion Sort:</span>
+                                <span class="complexity-value">O(n²)</span>
+                            </div>
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Merge Sort:</span>
+                                <span class="complexity-value">O(n log n)</span>
+                            </div>
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Quick Sort:</span>
+                                <span class="complexity-value">O(n log n) average</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="complexity-card">
+                        <h3>Space Complexity</h3>
+                        <div class="complexity-content">
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Bubble Sort:</span>
+                                <span class="complexity-value">O(1)</span>
+                            </div>
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Selection Sort:</span>
+                                <span class="complexity-value">O(1)</span>
+                            </div>
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Insertion Sort:</span>
+                                <span class="complexity-value">O(1)</span>
+                            </div>
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Merge Sort:</span>
+                                <span class="complexity-value">O(n)</span>
+                            </div>
+                            <div class="complexity-item">
+                                <span class="algorithm-name">Quick Sort:</span>
+                                <span class="complexity-value">O(log n) average</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="sorting.js"></script>
+    <script src="prism.js"></script>
+    <script src="bubble.js"></script>
+    <script src="selection.js"></script>
+    <script src="insertion.js"></script>
+    <script src="merge.js"></script>
+    <script src="quick.js"></script>
+    
+    <script>
+        // Tab functionality for code examples
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetTab = btn.dataset.tab;
+                    
+                    // Remove active class from all tabs and contents
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    btn.classList.add('active');
+                    document.getElementById(targetTab + '-code').classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
