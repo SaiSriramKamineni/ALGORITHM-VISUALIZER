@@ -123,6 +123,7 @@ const arrayManager = {
             bar.textContent = value;
             bar.setAttribute('data-index', index);
             bar.setAttribute('data-value', value);
+            bar.style.color = '#000000'; // Ensure text is visible
             
             elements.mainBody.appendChild(bar);
         });
@@ -357,13 +358,23 @@ window.waitforme = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Legacy swapping function
 window.swapping = (el1, el2) => {
+    // Store temporary values
     const tempHeight = el1.style.height;
     const tempText = el1.textContent;
+    const tempValue = el1.getAttribute('data-value');
     
+    // Swap heights (visual representation)
     el1.style.height = el2.style.height;
     el1.textContent = el2.textContent;
+    el1.setAttribute('data-value', el2.getAttribute('data-value'));
+    
     el2.style.height = tempHeight;
     el2.textContent = tempText;
+    el2.setAttribute('data-value', tempValue);
+    
+    // Ensure the text is visible and properly positioned
+    el1.style.color = '#000000';
+    el2.style.color = '#000000';
 };
 
 // Legacy disable/enable functions
