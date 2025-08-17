@@ -45,7 +45,12 @@ async function InsertionSort() {
 
         while (j >= 0 && (parseInt(element[j].style.height) > parseInt(p))) {
             element[j].style.background = 'rgb(9, 102, 2)';
+            
+            // Move element and update both height and text content
             element[j + 1].style.height = element[j].style.height;
+            element[j + 1].textContent = element[j].textContent;
+            element[j + 1].setAttribute('data-value', element[j].getAttribute('data-value'));
+            
             j--;
             beep.play();
             await waitforme(delay);
@@ -55,7 +60,10 @@ async function InsertionSort() {
             }
         }
         
+        // Place the current element in its correct position
         element[j + 1].style.height = p;
+        element[j + 1].textContent = parseInt(p);
+        element[j + 1].setAttribute('data-value', parseInt(p));
         element[i].style.background = 'rgb(3, 252, 11)';
     }
     
