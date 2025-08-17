@@ -87,6 +87,8 @@ async function Merge(element, low, mid, high) {
                 element[k].style.background = 'lightgreen';
             }
             element[k].style.height = left[i];
+            element[k].textContent = parseInt(left[i]);
+            element[k].setAttribute('data-value', parseInt(left[i]));
             i++;
             k++;
         } else {
@@ -96,6 +98,8 @@ async function Merge(element, low, mid, high) {
                 element[k].style.background = 'lightgreen';
             }
             element[k].style.height = right[j];
+            element[k].textContent = parseInt(right[j]);
+            element[k].setAttribute('data-value', parseInt(right[j]));
             j++;
             k++;
         }
@@ -110,6 +114,8 @@ async function Merge(element, low, mid, high) {
             element[k].style.background = 'lightgreen';
         }
         element[k].style.height = left[i];
+        element[k].textContent = parseInt(left[i]);
+        element[k].setAttribute('data-value', parseInt(left[i]));
         i++;
         k++;
     }
@@ -123,6 +129,8 @@ async function Merge(element, low, mid, high) {
             element[k].style.background = 'lightgreen';
         }
         element[k].style.height = right[j];
+        element[k].textContent = parseInt(right[j]);
+        element[k].setAttribute('data-value', parseInt(right[j]));
         j++;
         k++;
     }
